@@ -23,13 +23,13 @@ document.getElementById('validationForm').addEventListener('submit', function(ev
         
         // If no errors, display success message
         document.getElementById('resultMessage').textContent = 'Form submitted successfully!';
-        document.getElementById('resultMessage').classList.remove('error');
+        document.getElementById('resultMessage').classList.remove('text-danger');
         document.getElementById('resultMessage').classList.add('text-success');
     } catch (error) {
         console.error('Validation error:', error); // Console debugging message name with error
         handleValidationError(error);
         document.getElementById('resultMessage').textContent = 'Form validation failed. Please fix the errors and try again.';
-        document.getElementById('resultMessage').classList.add('error');
+        document.getElementById('resultMessage').classList.add('text-danger');
     } finally {
         // TODO: Add console debugging for 'Validation attempt finished.'
     }
