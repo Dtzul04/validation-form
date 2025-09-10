@@ -44,9 +44,9 @@ function clearErrors() {
 
 function validateForm() {
     const name = document.getElementById('name').value;
-    const email = document.getElementById('email').valiue;
-    const password = document.getElementById('password').valiue;
-    const confirmPassword = document.getElementById('confirmPassword').valiue;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
 
     console.log('Validating form', { name, email, password, confirmPassword }); 
 
@@ -55,15 +55,15 @@ function validateForm() {
     }
 
     if (!validateEmail(email)) {
-        throw new Error('Inavlid email format');
+        throw new Error('Invalid email format');
     }
 
     if (password.length < 8) {
-        throw new Error('Password must be at least 8 characters long');
+        throw new Error('Passwords must be at least 8 characters long');
     }
 
     if (password !== confirmPassword) {
-        throw new Error('Password do not match');
+        throw new Error('Passwords do not match');
     }
 
 }
@@ -86,11 +86,11 @@ function handleValidationError(error) {
             document.getElementById('emailError').textContent = error.message;
             break;
 
-        case 'Password must be at least 8 characters long':
+        case 'Passwords must be at least 8 characters long':
             document.getElementById('passwordError').textContent = error.message;
             break;
        
-        case 'Password do not match':
+        case 'Passwords do not match':
             document.getElementById('confirmPasswordError').textContent = error.message;
             break;
 
