@@ -10,90 +10,91 @@
  */
 
 document.getElementById('validationForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission
+    event.preventDefault();
 
-    // Clear previous error messages and result message
     clearErrors();
     document.getElementById('resultMessage').textContent = '';
 
     try {
-        console.log('Form submission started'); // Console debugging simple message
-        // Validate the form
+        console.log('Form submission started'); 
+        
         validateForm();
         
-        // If no errors, display success message
         document.getElementById('resultMessage').textContent = 'Form submitted successfully!';
         document.getElementById('resultMessage').classList.remove('text-danger');
         document.getElementById('resultMessage').classList.add('text-success');
     } catch (error) {
-        console.error('Validation error:', error); // Console debugging message name with error
+        console.error('Validation error:', error);
         handleValidationError(error);
         document.getElementById('resultMessage').textContent = 'Form validation failed. Please fix the errors and try again.';
         document.getElementById('resultMessage').classList.add('text-danger');
     } finally {
-        // TODO: Add console debugging for 'Validation attempt finished.'
+        console.log('Validation attempt finished.');
     }
 });
 
-// Function: Clear Previous Error Messages
 function clearErrors() {
-    // TODO: Add console debugging for 'Clearing error messages'
-    // Clear error from nameError on form
-    document.getElementById('nameError').textContent = '';
-    // TODO: Clear error from emailError on form
-    
-    // TODO: Clear error from passwordError on form
+    console.log('Clearing error messages')
 
-    // TODO: Clear error from confirmPasswordError on form
+    document.getElementById('nameError').textContent = '';
+    document.getElementById('emailError').textContent = '';
+    document.getElementById('passwordError').textContent = '';
+    document.getElementById('confirmPasswordError').textContent = '';
 }
 
-// Function: Validate Form Data
 function validateForm() {
-    // Assign input values to variables
     const name = document.getElementById('name').value;
-    // TODO: Assign value to email variable
+    const email = document.getElementById('email').valiue;
+    const password = document.getElementById('password').valiue;
+    const confirmPassword = document.getElementById('confirmPassword').valiue;
 
-    // TODO: Assign value to password variable
+    console.log('Validating form', { name, email, password, confirmPassword }); 
 
-    // TODO: Assign value to confirmPassword variable
-
-    console.log('Validating form', { name, email, password, confirmPassword }); // Console debugging with multiple values
-
-    // Validate name field
     if (name.trim() === '') {
         throw new Error('Name is required');
     }
 
-    // TODO: Validate email field using validateEmail function and throw error if invalid
+    if (!validateEmail(email)) {
+        throw new Error('Inavlid email format');
+    }
 
-    // TODO: Validate password length and throw error if less than 8 characters
+    if (password.length < 8) {
+        throw new Error('Password must be at least 8 characters long');
+    }
 
-    // TODO: Validate if password and confirmPassword match and throw error if they do not
+    if (password !== confirmPassword) {
+        throw new Error('Password do not match');
+    }
+
 }
 
-// Function: Custom Email Validation
 function validateEmail(email) {
-    // TODO: Add console debugging for 'Validating email:' and the email value
-    // Regular expression to check email format
+    console.log('Validating email:', email);
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
 
-// Function: Display Validation Errors
 function handleValidationError(error) {
-    // TODO: Add console debugging for 'Handling validation error:' and the error message
-    // Display specific error messages
+    console.log('Handling validation error:', error.message);
+
     switch (error.message) {
         case 'Name is required':
             document.getElementById('nameError').textContent = error.message;
             break;
         // TODO: Add case for 'Invalid email format' error
+        case 'Invalid email format':
+            document.getElementById('emailError').textContent = error.message;
+            break;
 
-        // TODO: Add case for 'Password must be at least 8 characters long' error
-
-        // TODO: Add case for 'Passwords do not match' error
+        case 'Password must be at least 8 characters long':
+            document.getElementById('passwordError').textContent = error.message;
+            break;
+       
+        case 'Password do not match':
+            document.getElementById('confirmPasswordError').textContent = error.message;
+            break;
 
         default:
-            // TODO: Add console.error() debugging for 'Unknown validation error:' and the error value
+            console.error('Unknown validation error:', error);
     }
 }

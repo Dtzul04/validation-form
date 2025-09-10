@@ -11,3 +11,7 @@ Create a web form with various input fields (e.g., name, email, password). Imple
 ### Concepts
 
 Try/Catch/Finally, custom errors, debugging 
+
+### My README section
+
+I have used the Assistant of ChatGPT to understand more depths with debugging and error for the assignment. 
